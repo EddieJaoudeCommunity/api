@@ -56,4 +56,13 @@ export class DiscordController {
   remove(@Param('id') id: string, @AuthorObject() author: Author) {
     return this.discordService.remove(id, author);
   }
+
+  @Get(':id/github')
+  @ApiSecurity('token')
+  @ApiHeader({ name: 'User-Uid', required: true })
+  @UseGuards(TokenGuard)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  github(@Param('uid') uid: string) {
+    return this.discordService.github(uid);
+  }
 }
